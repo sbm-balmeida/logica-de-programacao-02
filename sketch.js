@@ -11,10 +11,21 @@ function setup() {
   
 function draw() {
     background(0);
+    mostraBolinha();
+    mostraBolinha();
+    velocidadeXBolinha();
+}
+
+function mostraBolinha() {
     circle(xBolinha, yBolinha, diametro);
+}
+
+function movimentaBolinha() {
     xBolinha += velocidadeXBolinha;
     yBolinha += velocidadeYBolinha;
+}
 
+function verificaColisaoBorda() {
     if(xBolinha + raio > width || xBolinha - raio < 0) {
         velocidadeXBolinha *= -1;
     }
