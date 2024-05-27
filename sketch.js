@@ -15,6 +15,15 @@ let raqueteComprimento = 10;
 let raqueteAltura = 90;
 let colidiu = false;
 
+//variáveis do oponente
+let xRaqueteOponente = 585;
+let yRaqueteOponente = 150;
+let velocidadeYOponente;
+
+//placar do jogo
+let meusPontos = 0;
+let pontosDoOponente = 0;
+
 function setup() {
     createCanvas(600, 400);
 }
@@ -24,10 +33,14 @@ function draw() {
     mostraBolinha();
     movimentaBolinha();
     verificaColisaoBorda();
-    mostraRaquete();
+    mostraRaquete(xRaquete, yRaquete);
     movimentaMinhaRaquete();
-    //verificaColisaoRaquete();
-    colisaoMinhaRaqueteBiblioteca();
+    verificaColisaoRaquete(xRaquete, yRaquete);
+    mostraRaquete(xRaqueteOponente, yRaqueteOponente);
+    movimentaRaqueteOponente();
+    verificaColisaoRaquete(xRaqueteOponente, yRaqueteOponente);
+    incluiPlacar();
+    marcaPonto();
 }
 
 function mostraBolinha() {
@@ -49,8 +62,8 @@ function verificaColisaoBorda() {
     }
 }
 
-function mostraRaquete() {
-    rect(xRaquete, yRaquete, raqueteComprimento, raqueteAltura);
+function mostraRaquete(x, y) {
+    rect(x, y, raqueteComprimento, raqueteAltura);
 }
 
 function movimentaMinhaRaquete() {
@@ -61,18 +74,40 @@ function movimentaMinhaRaquete() {
     if(keyIsDown(DOWN_ARROW)) {
         yRaquete += 10;
     }
+
+    // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:
+    yRaquete = constrain(yRaquete, 10, 310);
 }
 
-function verificaColisaoRaquete() {
-    if(xBolinha - raio < xRaquete + raqueteComprimento && yBolinha - raio < yRaquete + raqueteAltura && yBolinha + raio > yRaquete) {
+function verificaColisaoRaquete(x, y) {
+    colidiu = collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio);
+
+    if(colidiu) {
         velocidadeXBolinha *= -1;
     }
 }
 
-function colisaoMinhaRaqueteBiblioteca() {
-    colidiu = collideRectCircle(xRaquete, yRaquete, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio);
+function movimentaRaqueteOponente() {
+    velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento/2 - 30;
 
-    if(colidiu) {
-        velocidadeXBolinha *= -1;
+    yRaqueteOponente += velocidadeYOponente;
+
+    // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:
+    yRaqueteOponente = constrain(yRaqueteOponente, 10, 310);
+}
+
+function incluiPlacar() {
+    fill(255);
+    text(meusPontos, 278, 26);
+    text(pontosDoOponente, 321, 26);
+}
+
+function marcaPonto() {
+    if(xBolinha > 590) {
+        meusPontos += 1;
+    }
+
+    if(xBolinha < 10) {
+        pontosDoOponente += 1;
     }
 }
