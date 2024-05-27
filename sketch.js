@@ -68,6 +68,9 @@ function movimentaMinhaRaquete() {
     if(keyIsDown(DOWN_ARROW)) {
         yRaquete += 10;
     }
+
+    // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:
+    yRaquete = constrain(yRaquete, 10, 310);
 }
 
 // function verificaColisaoRaquete() {
@@ -86,5 +89,9 @@ function verificaColisaoRaquete(x, y) {
 
 function movimentaRaqueteOponente() {
     velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento/2 - 30;
+    
     yRaqueteOponente += velocidadeYOponente;
+
+    // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:
+    yRaqueteOponente = constrain(yRaqueteOponente, 10, 310);
 }
