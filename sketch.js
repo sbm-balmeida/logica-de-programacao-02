@@ -106,8 +106,8 @@ function movimentaRaqueteOponente() {
 
     yRaqueteOponente += velocidadeYOponente;
 
-    // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:
-    yRaqueteOponente = constrain(yRaqueteOponente, 10, 310);*/
+    // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:*/
+    yRaqueteOponente = constrain(yRaqueteOponente, 10, 310);
 
     //MULTIPLAYER
     if(keyIsDown(87)) {
