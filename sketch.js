@@ -101,12 +101,22 @@ function verificaColisaoRaquete(x, y) {
 }
 
 function movimentaRaqueteOponente() {
-    velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento/2 - 30;
+    //SINGLEPLAYER
+    /*velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento/2 - 30;
 
     yRaqueteOponente += velocidadeYOponente;
 
     // Vamos limitar a movimentação da raquete para que ela não ultrapasse as bordas:
-    yRaqueteOponente = constrain(yRaqueteOponente, 10, 310);
+    yRaqueteOponente = constrain(yRaqueteOponente, 10, 310);*/
+
+    //MULTIPLAYER
+    if(keyIsDown(87)) {
+        yRaqueteOponente -= 10;
+    }
+
+    if(keyIsDown(83)) {
+        yRaqueteOponente += 10;
+    }
 }
 
 function incluiPlacar() {
