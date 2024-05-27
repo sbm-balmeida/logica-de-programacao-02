@@ -1,7 +1,7 @@
 //variáveis da bolinha
 let xBolinha = 300;
 let yBolinha = 200;
-let diametro = 15;
+let diametro = 13;
 
 //velocidade da bolinha
 let raio = diametro/2;
@@ -97,9 +97,17 @@ function movimentaRaqueteOponente() {
 }
 
 function incluiPlacar() {
-    fill(255);
-    text(meusPontos, 278, 26);
-    text(pontosDoOponente, 321, 26);
+    stroke(255);
+    textAlign(CENTER); //alinhar a placar no centro
+    textSize(16); //tamanho da fonte
+    fill(color(255, 140, 0)); //cor do quadro dos meus pontos
+    rect(150, 10, 40, 20); //criar o quadro dos meus pontos
+    fill(255); //cor da fonte do placa
+    text(meusPontos, 170, 26); //posição dos meus pontos 
+    fill(color(255, 140, 0)); //cor do quadro do meu oponente
+    rect(450, 10, 40, 20); //criar o quadro dos pontos do oponente
+    fill(255); //cor da fonte do placa
+    text(pontosDoOponente, 470, 26); //posição dos pontos do oponentes
 }
 
 function marcaPonto() {
